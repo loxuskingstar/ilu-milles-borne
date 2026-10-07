@@ -1,4 +1,6 @@
 package cartes;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JeuDeCartes {
 	
@@ -75,15 +77,27 @@ public class JeuDeCartes {
 
         return deck;
     }
-    
+
+
     public boolean checkCount() {
-    	Carte[] deck = donnerCartes();
-    }
-    
-    public void main() {
-    	Carte[] deck = donnerCartes();
-    	for (int i=0; i<deck.length;i++) {
-    		System.out.println("Carte : " + deck[i].toString());
-    	}
+        Carte[] deck = donnerCartes();
+        
+        Map<Carte, Integer> compteDeck = new HashMap<>();
+        for (Carte carte : deck) {
+            compteDeck.put(carte, compteDeck.getOrDefault(carte, 0) + 1);
+        }
+        
+        for (Configuration config : typesDeCartes) {
+            Carte carteAttendue = config.getCarte();
+            int nbAttendu = config.getNbExemplaires();
+            
+            int nbTrouve = compteDeck.getOrDefault(carteAttendue, 0);
+            
+            if (nbTrouve != nbAttendu) {
+                return false; 
+            }
+        }
+        
+        return true; 
     }
 }
