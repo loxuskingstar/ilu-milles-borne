@@ -11,7 +11,7 @@ import utils.GestionCartes;
 public class TestGestionCartes {
 
     public static <T> void testerRassemblement(String nom, List<T> liste) {
-        System.out.println("\n--- Test : " + nom + " ---");
+        System.out.println("\n Test : " + nom);
         System.out.println("Initiale : " + liste);
         
         List<T> rassemblee = GestionCartes.rassembler(liste);
